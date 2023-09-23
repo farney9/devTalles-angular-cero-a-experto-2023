@@ -1,0 +1,34 @@
+<h4>List</h4>
+<ul class="list-group">
+  <li
+    *ngFor="
+    let character of characterlist;
+    let i = index;
+    let isFirts = first;
+    let isLast = last;
+    let isEven = even;
+    let isOdd = odd;"
+
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    [ngClass]="{
+      'list-group-item-dark': isLast,
+      'list-group-item-primary': isEven
+    }">
+    <div>
+      <span class="text-primary">{{i + 1}} </span>
+      <span>{{character.name}}</span>
+      <strong> - Power: </strong>
+      <span>{{character.power}}</span>
+    </div>
+
+    <span
+      (click)="onDeleteItem(i)">
+        <i class="fa-regular fa-trash-can text-danger"> </i>
+    </span>
+    <!-- <span> Es el primero?: {{isFirts}}</span> -->
+    <!-- <span> Es el último?: {{isLast}}</span> -->
+    <!-- <span> Es par?: {{isLast}}</span> -->
+    <!-- <span> Es Impar?: {{isOdd}}</span> -->
+  </li>
+  <!-- <li class="list-group-item list-group-item-light list-group-item-action">Gokú - 10000</li> -->
+</ul>

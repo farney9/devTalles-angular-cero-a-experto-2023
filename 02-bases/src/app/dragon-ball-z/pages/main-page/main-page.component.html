@@ -1,0 +1,12 @@
+<h1>Dragon Ball Z Characters</h1>
+<hr>
+<div class="row px-2">
+  <div class="col">
+    <dbz-character-list [characterlist]="characters" (deleteCharacterEvent)="onDeleteCharacterHandler($event)"></dbz-character-list>
+    <hr>
+    <pre>{{characters | json}}</pre>
+  </div>
+  <div class="col">
+    <dbz-add-character (newCharacterEvent)="onNewCharacterHandler($event)"></dbz-add-character>
+  </div>
+</div>
