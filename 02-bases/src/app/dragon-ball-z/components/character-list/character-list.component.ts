@@ -9,14 +9,14 @@ import { Character } from '../../interfaces/character.interface';
 export class CharacterListComponent {
 
   @Input() characterlist: Character[] = [];
-  @Output() deleteCharacterEvent: EventEmitter<number> = new EventEmitter();
+  @Output() deleteCharacterEvent: EventEmitter<string> = new EventEmitter();
 
 
-  onDeleteItem(index: number) {
-    this.deleteCharacterEvent.emit(index)
-    // console.log({index});
-    // this.characterlist.splice(index,1);
+  onDeleteItem(id?: string) {
+    console.log({id});
 
+    if (!id) return;
+    this.deleteCharacterEvent.emit(id)
   }
 
 }
