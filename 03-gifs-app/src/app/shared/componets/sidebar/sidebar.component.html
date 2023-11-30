@@ -3,8 +3,11 @@
   <hr class="text-white">
   <div class="list-group">
     <!-- <a href="#" class="list-group-item list-group-item-action">A second link item</a> -->
-    <a href="#" class="list-group-item list-group-item-action text-center" aria-current="true">
-      Valorant
+    <a
+      *ngFor="let tagItem of tags"
+      href="#"
+      class="list-group-item list-group-item-action text-center" aria-current="true">
+      {{tagItem | titlecase}}
     </a>
   </div>
 </div>
