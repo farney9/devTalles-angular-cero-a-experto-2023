@@ -1,14 +1,6 @@
 <div class="row row-cols-1 row-cols-md-4 g-4">
-  <!-- <gifs-card-list-item></gifs-card-list-item> -->
-
-  <div *ngFor="let gif of gifs"  class="col">
-    <div class="card h-100 bg-dark">
-      //TODO: Crear imagen
-      <img [src]="gif.images.downsized_medium.url" class="card-img-top" [alt]="gif.title">
-      <div class="card-body text-white">
-        <h5 class="card-title">{{gif.title}}</h5>
-        <!-- <p class="card-text">{{gif.user.description || undefined}}.</p> -->
-      </div>
-    </div>
-  </div>
+  <gifs-card-list-item
+    *ngFor="let gif of gifs"  class="col"
+    [gif]="gif">
+  </gifs-card-list-item>
 </div>
