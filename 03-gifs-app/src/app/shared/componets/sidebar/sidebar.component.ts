@@ -20,6 +20,4 @@ export class SidebarComponent {
   searchTag(tagName: string) {
     this.gifsService.search(tagName);
   }
-
-
 }

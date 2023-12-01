@@ -30,10 +30,14 @@ export class GifsService {
 
     // unshift agrega un nuevo elemento a la inicio del arreglo
     this._tagsHistory.unshift(newTag);
-
-    this._tagsHistory = this._tagsHistory.splice(0, 10)
-
+    this._tagsHistory = this._tagsHistory.splice(0, 10);
+    this.saveToLocalStorage();
   }
+
+  private saveToLocalStorage() {
+    localStorage.setItem('history', JSON.stringify(this._tagsHistory));
+  }
+
   search(tag: string) {
     if (tag.length === 0) return;
     this.organizeTagsHistory(tag)
