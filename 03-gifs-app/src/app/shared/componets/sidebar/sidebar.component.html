@@ -5,6 +5,7 @@
     <!-- <a href="#" class="list-group-item list-group-item-action">A second link item</a> -->
     <a
       *ngFor="let tagItem of tags"
+      (click)="searchTag(tagItem)"
       href="#"
       class="list-group-item list-group-item-action text-center" aria-current="true">
       {{tagItem | titlecase}}
