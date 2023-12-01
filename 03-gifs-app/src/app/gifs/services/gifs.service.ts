@@ -13,26 +13,25 @@ export class GifsService {
   private _tagsHistory: string[] = [];
   private serviceUrl = 'https://api.giphy.com/v1/gifs';
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   get tagHistory() {
     // operador spread para crear una copia de los tagsHistory
     return [...this._tagsHistory];
   }
 
-  private organizeTagsHistory( newTag: string) {
+  private organizeTagsHistory(newTag: string) {
 
     newTag = newTag.toLowerCase();
 
-
     if (this._tagsHistory.includes(newTag)) {
-      this._tagsHistory = this._tagsHistory.filter( (tag) => tag !== newTag);
+      this._tagsHistory = this._tagsHistory.filter((tag) => tag !== newTag);
     }
 
     // unshift agrega un nuevo elemento a la inicio del arreglo
     this._tagsHistory.unshift(newTag);
 
-    this._tagsHistory = this._tagsHistory.splice(0,10)
+    this._tagsHistory = this._tagsHistory.splice(0, 10)
 
   }
   search(tag: string) {
@@ -45,16 +44,9 @@ export class GifsService {
 
     const url = `${this.serviceUrl}/search`
 
-    this.http.get<SearchResponse>(url, {params})
-      .subscribe( resp => {
+    this.http.get<SearchResponse>(url, { params })
+      .subscribe(resp => {
         this.gifList = resp.data;
-        console.log({gifs: this.gifList});
-    })
-
-/*     const resp = await fetch('https://api.giphy.com/v1/gifs/search?api_key=1rJql31gSmcFCljdH3aR3LRcXrJRG96y&q=valorant&limit=10')
-    const data = await resp.json()
- */
+      })
   }
-
-
 }
