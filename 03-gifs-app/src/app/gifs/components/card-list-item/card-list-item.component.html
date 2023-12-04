@@ -1,8 +1,10 @@
-<div class="card h-100 bg-dark">
+<div class="card h-100 bg-dark text-center">
   //TODO: Crear imagen
-  <img [src]="gif.images.downsized_medium.url" class="card-img-top" [alt]="gif.title">
+  <!-- <img [src]="gif.images.downsized_medium.url" class="card-img-top" [alt]="gif.title"> -->
+  <shared-lazy-image [url]="gif.images.downsized_medium.url" [alt]="gif.title || 'No name'"></shared-lazy-image>
+
   <div class="card-body text-white">
-    <h5 class="card-title">{{gif.title}}</h5>
+    <h5 class="card-title">{{gif.title || 'No Title'}}</h5>
     <!-- <p class="card-text">{{gif.user.description || undefined}}.</p> -->
   </div>
 </div>
