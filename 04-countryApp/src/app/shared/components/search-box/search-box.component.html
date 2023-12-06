@@ -1,0 +1,18 @@
+<div class="input-group">
+  <input
+    (keyup.enter)="onSearch(txtSearchInput.value)"
+    (blur)="onSearch(txtSearchInput.value)"
+    type="text"
+    class="form-control"
+    [placeholder]="placeholder"
+    #txtSearchInput
+  >
+  <div class="input-group-text">
+    <button
+      (click)="onSearch(txtSearchInput.value)"
+      class="btn btn-secondary"
+      type="button">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>

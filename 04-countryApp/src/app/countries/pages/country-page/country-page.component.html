@@ -1,0 +1,119 @@
+<ng-template #loading>
+  <div class="alert alert-info text-center">
+    Espere por favor ..
+  </div>
+</ng-template>
+
+<div *ngIf="country; else loading">
+  <div class="row mt-2">
+    <div class="col-12">
+      <h2>País: <strong>{{country.name.common}}</strong></h2>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Bandera</h3>
+      <img
+        class="img-thumbnail"
+        [src]="country.flags.svg" [alt]="country.name.common">
+    </div>
+    <div class="col">
+      <h3>Detalles</h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Población:</strong> {{country.population | number}}</li>
+        <li class="list-group-item"><strong>Capital:</strong> {{country.capital}}</li>
+        <li class="list-group-item"><strong>Código Alpha CCA2:</strong> {{country.cca2}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+        <h3>Traducciones</h3>
+        <table class="table table-dark table-sm mt-4">
+          <tbody>
+            <tr>
+              <td><strong>spa</strong></td>
+              <td>{{country.translations['spa'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>deu</strong></td>
+              <td>{{country.translations['deu'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>fra</strong></td>
+              <td>{{country.translations['fra'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>bre</strong></td>
+              <td>{{country.translations['bre'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>ita</strong></td>
+              <td>{{country.translations['ita'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>jpn</strong></td>
+              <td>{{country.translations['jpn'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>ces</strong></td>
+              <td>{{country.translations['ces'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>cym</strong></td>
+              <td>{{country.translations['cym'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>est</strong></td>
+              <td>{{country.translations['est'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>ara</strong></td>
+              <td>{{country.translations['ara'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>fin</strong></td>
+              <td>{{country.translations['fin'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>rus</strong></td>
+              <td>{{country.translations['rus'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>kor</strong></td>
+              <td>{{country.translations['kor'].common}}</td>
+            </tr>
+            <tr>
+              <td><strong>per</strong></td>
+              <td>{{country.translations['per'].common}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <h3>Lenguajes</h3>
+        <table class="table table-dark table-sm mt-4">
+          <tbody>
+            <tr>
+              <td><strong>spa</strong></td>
+              <td>{{country.languages.spa}}</td>
+            </tr>
+            <tr>
+              <td><strong>swe</strong></td>
+              <td>{{country.languages.swe}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+<!--       <div class="col">
+        <span><strong>ara</strong></span>
+      </div>
+      <div class="col">
+        <div class="d-flex flex-wrap">
+          <span class="badge bg-primary m-1">{{country.translations['ara'].common}}</span>
+        </div>
+      </div> -->
+  </div>
+</div>
