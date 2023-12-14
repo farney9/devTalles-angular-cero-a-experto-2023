@@ -3,14 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, catchError, delay, map, of, tap } from 'rxjs';
 import { CountryResponse } from '../interfaces/country.interface';
+import { CacheStoreModel } from '../interfaces/cache-store.interface';
 
 @Injectable({ providedIn: 'root' })
 
 export class CountriesService {
 
-  private API = environment.apiUrl
+  private API = environment.apiUrl;
+  cacheStore: CacheStoreModel = {
+    byCapital: {term: '', countries:[]},
+    byCountries: {term: '', countries:[]},
+    byRegion: {region: '', countries:[]},
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private getCountriesRequest(url: string): Observable<CountryResponse[]> {
     return this.http.get<CountryResponse[]>(url)
