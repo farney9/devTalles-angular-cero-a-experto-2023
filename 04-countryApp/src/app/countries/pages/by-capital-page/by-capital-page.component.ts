@@ -10,11 +10,12 @@ import { CountryResponse } from '../../interfaces/country.interface';
 export class ByCapitalPageComponent implements OnInit{
 
 
-  countries: CountryResponse[] = [];
-  isloading = false;
-
   private readonly countriesService = inject(CountriesService);
+
+  countries: CountryResponse[] = [];
   initialValue = ''
+  isloading = false;
+  
   ngOnInit(): void {
     this.countries = this.countriesService.cacheStore.byCapital.countries;
     this.initialValue = this.countriesService.cacheStore.byCapital.term

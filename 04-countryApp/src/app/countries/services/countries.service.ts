@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { CountryResponse } from '../interfaces/country.interface';
 import { CacheStoreModel } from '../interfaces/cache-store.interface';
+import { Region } from '../interfaces/region.type';
 
 @Injectable({ providedIn: 'root' })
 
@@ -34,16 +35,23 @@ export class CountriesService {
     return this.getCountriesRequest(url)
         .pipe(
           // tap dispara un efecto secundario
-          tap( countries => this.cacheStore.byCapital = { term, countries})
+          tap( countries => this.cacheStore.byCapital = { term, countries}),
         )
   }
   searchByCountry(term: string): Observable<CountryResponse[]> {
     const url = `${this.API}/name/${term}`
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+    .pipe(
+      // tap dispara un efecto secundario
+      tap( countries => this.cacheStore.byCountries = { term, countries}),
+    )
   }
-  searchByRegion(region: string): Observable<CountryResponse[]> {
+  searchByRegion(region: Region): Observable<CountryResponse[]> {
     const url = `${this.API}/region/${region}`
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+    .pipe(
+      tap( countries => this.cacheStore.byRegion = { region, countries}),
+    )
   }
   searchByAlphaCode(code: string): Observable<CountryResponse | null> {
     const url = `${this.API}/alpha/${code}`;
