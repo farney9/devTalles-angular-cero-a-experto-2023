@@ -1,7 +1,6 @@
 <div class="input-group">
   <input
-    (keyup.enter)="onSearch(txtSearchInput.value)"
-    (blur)="onSearch(txtSearchInput.value)"
+    (keyup)="onKeyPress(txtSearchInput.value)"
     type="text"
     class="form-control"
     [placeholder]="placeholder"

@@ -1,5 +1,9 @@
 # CountryApp
 
+## Curso
+
+<https://cursos.devtalles.com/courses/take/angular/lessons/41715221-buscar-por-region-optimizacion>
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
 ## Development server

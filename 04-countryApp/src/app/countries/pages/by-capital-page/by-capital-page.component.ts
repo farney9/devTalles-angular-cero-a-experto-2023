@@ -10,21 +10,25 @@ import { CountryResponse } from '../../interfaces/country.interface';
 export class ByCapitalPageComponent {
 
   countries: CountryResponse[] = [];
-
+  isloading = false;
 
   private readonly countriesService = inject(CountriesService);
 
 
   searchByCapital(term: string) {
+
+    this.isloading = true;
+
     this.countriesService.searchByCapital(term)
       .subscribe({
         next: (response) => {
           this.countries = response;
+          this.isloading = false;
           // console.log(this.countries);
-
         },
         error: () => {
-          
+          this.isloading = false;
+
         }
       })
 
