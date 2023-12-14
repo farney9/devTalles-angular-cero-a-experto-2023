@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { CountryResponse } from '../../interfaces/country.interface';
 
@@ -7,14 +7,18 @@ import { CountryResponse } from '../../interfaces/country.interface';
   templateUrl: './by-capital-page.component.html',
   styles: ``
 })
-export class ByCapitalPageComponent {
+export class ByCapitalPageComponent implements OnInit{
+
 
   countries: CountryResponse[] = [];
   isloading = false;
 
   private readonly countriesService = inject(CountriesService);
-
-
+  initialValue = ''
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheStore.byCapital.countries;
+    this.initialValue = this.countriesService.cacheStore.byCapital.term
+  }
   searchByCapital(term: string) {
 
     this.isloading = true;

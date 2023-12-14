@@ -9,6 +9,7 @@ import { Subject, Subscription, debounceTime } from 'rxjs';
 export class SearchBoxComponent implements OnInit, OnDestroy {
 
   @Input() placeholder: string = ''
+  @Input() initialValue: string = ''
   @Output() onSearchEvent = new EventEmitter<string>();
   @Output() onDebounceEvent = new EventEmitter<string>();
   @ViewChild('txtSearchInput') searchInput!: ElementRef<HTMLInputElement>;
@@ -25,7 +26,7 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
         next: (value) => {
           // console.log('Debouncer value', value);
           this.onDebounceEvent.emit(value);
-          this.searchInput.nativeElement.value = ''
+          // this.searchInput.nativeElement.value = this.initialValue;
         }
       })
   }
@@ -36,7 +37,7 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
 
   onSearch(term: string) {
     this.onSearchEvent.emit(term);
-    this.searchInput.nativeElement.value = ''
+    // this.searchInput.nativeElement.value = this.initialValue;
   }
 
   onKeyPress(searchTerm: string) {
