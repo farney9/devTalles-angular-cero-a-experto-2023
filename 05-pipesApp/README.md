@@ -1,5 +1,9 @@
 # PipesApp
 
+## Curso
+
+[Curso-Angular DevTalles](https://cursos.devtalles.com/courses/take/angular/lessons/41788359-uppercase-lowercase-y-titlecase-pipes)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
 ## Development server

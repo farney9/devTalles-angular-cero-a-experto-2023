@@ -2,9 +2,10 @@
 @import "primeng/resources/themes/lara-dark-purple/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import "primeflex/primeflex.min.css";
 
 .card {
-  padding: 2rem;
+  /* padding: 2rem; */
   border-radius: 10px;
   margin-bottom: 1rem;
 }
