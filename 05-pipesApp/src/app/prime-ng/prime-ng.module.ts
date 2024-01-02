@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RippleModule } from 'primeng/ripple';
-import { ButtonModule } from 'primeng/button';
 // import { MenuModule } from 'primeng/menu';
-import { MenubarModule } from 'primeng/menubar';
-import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
+import { NgModule } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
-
+import { RippleModule } from 'primeng/ripple';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [],
@@ -20,6 +20,7 @@ import { PanelModule } from 'primeng/panel';
     MenubarModule,
     PanelModule,
     RippleModule,
+    ToolbarModule,
   ]
 })
 export class PrimeNgModule { }
