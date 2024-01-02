@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
 import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
-
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [],
   exports: [
@@ -20,6 +20,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     MenubarModule,
     PanelModule,
     RippleModule,
+    TableModule,
     ToolbarModule,
   ]
 })
