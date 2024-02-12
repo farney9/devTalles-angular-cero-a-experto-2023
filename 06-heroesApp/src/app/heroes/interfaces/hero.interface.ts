@@ -7,9 +7,10 @@ export interface HeroModel {
   alter_ego:        string;
   first_appearance: string;
   characters:       string;
+  alt_img?:          string;
 }
 
 export enum Publisher {
-  DCComics = "DC Comics",
-  MarvelComics = "Marvel Comics",
+  DCCOMICS = "DC Comics",
+  MARVELCOMICS = "Marvel Comics",
 }
