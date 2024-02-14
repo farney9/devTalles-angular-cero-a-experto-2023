@@ -1,13 +1,25 @@
 # HeroesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
+## Curso en Devtalles
+
+ [Angular de cero a experto](https://cursos.devtalles.com/courses/take/angular/lessons/41982550-continuacion-de-la-seccion)
 
 ## Dev
 
 1. Clonar el proyecto
-2. Ejecutar `npm install`
-3. levantar backend `npm run backend`
-4. Ejecutar `ng serve` o `ng serve -o`
+2. Ejecutar
+
+    ```code
+    npm install
+    ```
+
+3. levantar backend
+
+    ```code
+    npm run backend
+    ```
+
+4. Ejecutar ```ng start``` o ```ng serve -o```
 
 ## Development server
 
