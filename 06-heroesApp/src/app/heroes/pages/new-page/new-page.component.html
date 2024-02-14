@@ -1,1 +1,75 @@
-<p>new-page works!</p>
+<div class="p-2">
+  <h1> Edit / add Hero <small>Superman</small></h1>
+  <mat-divider></mat-divider>
+  <div class="grid">
+    <div class="col-12 sm:col-6">
+      <mat-card>
+        <mat-card-content>
+          <div class="grid">
+            <mat-form-field class="col-12 sm:col-6">
+              <mat-label>Super hero</mat-label>
+              <input
+                matInput
+                required="true"
+                type="text">
+            </mat-form-field>
+            <mat-form-field class="col-12 sm:col-6">
+              <mat-label>Alter ego</mat-label>
+              <input
+                matInput
+                required="true"
+                type="text">
+            </mat-form-field>
+            <mat-form-field class="col-12 sm:col-12">
+              <mat-label>First Appearance</mat-label>
+              <input
+                matInput
+                required="true"
+                type="text">
+            </mat-form-field>
+            <mat-form-field class="col-12 sm:col-12">
+              <mat-label>Characters</mat-label>
+              <input
+                matInput
+                required="true"
+                type="text">
+            </mat-form-field>
+            <mat-form-field class="col-12 sm:col-12">
+              <mat-label>Publisher</mat-label>
+              <mat-select
+                required>
+              <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+                {{publisher.desc}}
+              </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="flex justify-content-between">
+            <button
+              mat-flat-button
+              color="warn"
+              (click)="null">
+              <mat-icon>delete</mat-icon>Delete
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="null">
+              <mat-icon>save</mat-icon>Save
+            </button>
+
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 sm:col-6">
+      <mat-card class="col-12 sm:col-6 ">
+        <!-- <mat-card-header>
+          <mat-card-title>{{hero.alter_ego}}</mat-card-title>
+          <mat-card-subtitle>{{hero.superhero}}</mat-card-subtitle>
+        </mat-card-header> -->
+        <img src="" alt="imagen del héroe">
+      </mat-card>
+    </div>
+  </div>
+</div>
