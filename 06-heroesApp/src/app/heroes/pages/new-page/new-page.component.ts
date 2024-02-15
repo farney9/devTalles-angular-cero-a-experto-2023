@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 import { HeroesService } from '../../services/heroes.service';
@@ -17,7 +18,8 @@ export class NewPageComponent implements OnInit{
   constructor(
       private readonly heroesService: HeroesService,
       private activatedRoute: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private snackBar: MatSnackBar
     ) {}
   ngOnInit(): void {
     if (!this.router.url.includes('edit')) return;
@@ -60,16 +62,24 @@ export class NewPageComponent implements OnInit{
     if (this.currentHero.id) {
       this.heroesService.update(this.currentHero)
         .subscribe(heroUpdated => {
-          // TODO: Mostar snackbar
+          this.showSnackbar(`${heroUpdated.superhero} updated!`);
         })
         return;
     }
 
     this.heroesService.add(this.currentHero)
       .subscribe(newHero => {
-        // TODO: Mostrar snackbar y navegar a /heroes/edit/hero.id
-      })
+        this.showSnackbar(`${newHero.superhero} added!`);
+        this.router.navigateByUrl(`/heroes/edit/${newHero.id}`);
 
+      })
   }
 
+  showSnackbar(message: string) {
+    this.snackBar.open(message, 'done', {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    })
+  }
 }

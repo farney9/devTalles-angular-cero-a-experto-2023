@@ -1,5 +1,6 @@
 <div class="p-2">
-  <h1> Edit / add Hero <small>Superman</small></h1>
+  <h1> {{currentHero.id ? 'Edit': 'Add'}} Hero <small *ngIf="currentHero.id">{{ currentHero.superhero}}</small></h1>
+
   <mat-divider></mat-divider>
   <div class="grid">
     <div class="col-12 sm:col-6">
@@ -70,16 +71,17 @@
           </form>
           <div class="flex justify-content-between">
             <button
+            *ngIf="currentHero.id"
               mat-flat-button
-              color="warn"
-              (click)="null">
+              color="warn">
               <mat-icon>delete</mat-icon>Delete
             </button>
+            <span></span>
             <button
               mat-flat-button
               color="primary"
               (click)="onSubmit()">
-              <mat-icon>save</mat-icon>Save
+              <mat-icon>{{currentHero.id ? 'edit': 'save'}}</mat-icon>{{currentHero.id ? 'Edit': 'Save'}}
             </button>
 
           </div>
