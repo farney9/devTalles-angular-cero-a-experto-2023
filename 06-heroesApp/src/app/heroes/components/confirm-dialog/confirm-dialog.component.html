@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Delete file</h2>
+<mat-dialog-content>
+  Would you like to delete to <strong>{{data.superhero}}</strong>?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <span class="spacer"></span>
+  <button
+    color="primary"
+    mat-button
+    (click)="onConfirmClick()"
+    cdkFocusInitial>Ok
+  </button>
+</mat-dialog-actions>

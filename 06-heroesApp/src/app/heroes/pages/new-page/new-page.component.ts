@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, switchMap, tap } from 'rxjs';
+
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 
 import { HeroesService } from '../../services/heroes.service';
 import { HeroModel, Publisher } from '../../interfaces/hero.interface';
-import { switchMap } from 'rxjs';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-new-page',
@@ -19,7 +23,8 @@ export class NewPageComponent implements OnInit{
       private readonly heroesService: HeroesService,
       private activatedRoute: ActivatedRoute,
       private router: Router,
-      private snackBar: MatSnackBar
+      private snackBar: MatSnackBar,
+      private dialog: MatDialog
     ) {}
   ngOnInit(): void {
     if (!this.router.url.includes('edit')) return;
@@ -57,7 +62,6 @@ export class NewPageComponent implements OnInit{
   }
 
   onSubmit() {
-
     if (this.heroForm.invalid) return;
     if (this.currentHero.id) {
       this.heroesService.update(this.currentHero)
@@ -80,6 +84,27 @@ export class NewPageComponent implements OnInit{
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
+    })
+  }
+
+  onConfirmDeleteHero(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    if (!this.currentHero.id) throw Error('Hero id is required');
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: this.heroForm.value
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter((result: boolean) => result),
+        switchMap( () => this.heroesService.deleteById(this.currentHero.id)),
+        filter((wasDeleted: boolean) => wasDeleted),
+      )
+    .subscribe( () => {
+      this.router.navigate(['heroes'])
     })
   }
 }
