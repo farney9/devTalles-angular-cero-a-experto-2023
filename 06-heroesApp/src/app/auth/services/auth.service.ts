@@ -30,8 +30,13 @@ export class AuthService {
     return this.http.get<UserModel>(`${this.url}/users/1`)
       .pipe(
         tap( response => this.user = response),
-        tap( response => localStorage.setItem('token', response.id.toString())),
+        tap( response => localStorage.setItem('token', 'Asdf3455355.55352525.br34634')),
         catchError(error => of())
       )
+  }
+
+  logout() {
+    this.user = undefined;
+    localStorage.removeItem('token');
   }
 }
