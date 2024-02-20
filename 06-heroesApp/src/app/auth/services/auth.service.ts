@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 
 import { environment } from '../../../environments/environment.development';
@@ -33,6 +33,19 @@ export class AuthService {
         tap( response => localStorage.setItem('token', 'Asdf3455355.55352525.br34634')),
         catchError(error => of())
       )
+  }
+
+  isUserAuthenticated(): Observable<boolean> | boolean {
+    if (!localStorage.getItem('token')) return false;
+
+    const token = localStorage.getItem('token');
+
+    return this.http.get<UserModel>(`${ this.url }/users/1`)
+      .pipe(
+        tap( user => this.user = user),
+        map( user => !!user), // Si el usuario existe regreso un valor booleano eso se logra con !!user
+        catchError( err => of(false))
+        )
   }
 
   logout() {
