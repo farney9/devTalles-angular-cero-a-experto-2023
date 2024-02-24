@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { cantBeStrider } from '../../../shared/helpers/validators';
 
 
 const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -14,7 +15,7 @@ export class RegisterPageComponent {
 
   registerForm: FormGroup = this.fb.group({
     fullName: ['asd123', [Validators.required, Validators.minLength(3)]],
-    userName: ['farney9', [Validators.required, Validators.minLength(3)]],
+    userName: ['farney9', [Validators.required, cantBeStrider]],
     password: ['123456', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['123456', [Validators.required, Validators.minLength(6)]],
     email: ['a@b.com', [Validators.required, Validators.pattern(emailPattern)]],
