@@ -11,8 +11,7 @@
         <label class="col-sm-3 col-form-label">Nombre</label>
         <div class="col-sm-9">
           <input formControlName="fullName" type="text" class="form-control" placeholder="Nombre del usuario">
-          for
-          <span class="form-text text-danger">
+          <span *ngIf="isvalidField('fullName')" class="form-text text-danger">
             Debe de ser en formato de nombre y apellido
           </span>
         </div>
@@ -23,7 +22,7 @@
         <label class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-9">
           <input formControlName="email" type="email" class="form-control" placeholder="Email del usuario">
-          <span class="form-text text-danger">
+          <span *ngIf="isvalidField('email')" class="form-text text-danger">
             mensaje de error del email
           </span>
         </div>
@@ -34,7 +33,7 @@
         <label class="col-sm-3 col-form-label">Username</label>
         <div class="col-sm-9">
           <input formControlName="userName" type="text" class="form-control" placeholder="Nombre código del usuario">
-          <span class="form-text text-danger">
+          <span *ngIf="isvalidField('userName')" class="form-text text-danger">
             El username no puede ser Strider
           </span>
         </div>
@@ -46,7 +45,7 @@
         <div class="col-sm-9">
           <input formControlName="password" type="password" class="form-control" placeholder="Password de su cuenta">
 
-          <span class="form-text text-danger">
+          <span *ngIf="isvalidField('password')" class="form-text text-danger">
             La contraseña debe de ser mayor de 6 caracteres.
           </span>
         </div>
@@ -58,8 +57,8 @@
         <div class="col-sm-9">
           <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirmar la contraseña">
 
-          <span class="form-text text-danger">
-            Las contraseñas deben de ser iguales
+          <span *ngIf="isvalidField('confirmPassword')" class="form-text text-danger">
+            Las contraseñas deben ser iguales.
           </span>
         </div>
       </div>
@@ -85,7 +84,7 @@
 <h2>Form errors</h2>
 <pre>{{ registerForm.errors | json }}</pre>
 
-<h5>Nombre</h5>
+<h5>Full Name</h5>
 <pre>{{ registerForm.controls['fullName'].value | json }}</pre>
 
 <h5>Email</h5>

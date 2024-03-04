@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { cantBeStrider } from '../../../shared/helpers/validators';
-
-
-const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+import { ValidatorsService } from '../../../shared/services/validators.service';
+import { EmailValidatorService } from '../../../shared/helpers/email-validator.service';
 
 @Component({
   selector: 'app-register-page',
@@ -14,15 +12,24 @@ const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 export class RegisterPageComponent {
 
   registerForm: FormGroup = this.fb.group({
-    fullName: ['asd123', [Validators.required, Validators.minLength(3)]],
-    userName: ['farney9', [Validators.required, cantBeStrider]],
+    fullName: ['Wester Jim', [Validators.required, Validators.minLength(3), Validators.pattern(this.validatorsService.firstNameAndLastnamePattern)]],
+    userName: ['farney9', [Validators.required, this.validatorsService.cantBeStrider]],
     password: ['123456', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['123456', [Validators.required, Validators.minLength(6)]],
-    email: ['a@b.com', [Validators.required, Validators.pattern(emailPattern)]],
+    email: [
+      'a@b.com',
+      [Validators.required,
+      Validators.pattern(this.validatorsService.emailPattern),
+      [ this.emailValidatorService]]
+    ],
   })
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private validatorsService: ValidatorsService,
+    private emailValidatorService: EmailValidatorService
+  ) { }
   onRegister() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -32,10 +39,8 @@ export class RegisterPageComponent {
     this.registerForm.reset();
   }
 
-  // TODO: Obtener validación desde un servicio
-  isvalidField(field: string): boolean | null {
-    return this.registerForm.controls[field].errors
-      && this.registerForm.controls[field].touched;
+  isvalidField(field: string) {
+    return this.validatorsService.isvalidField(this.registerForm, field)
   }
 
 }
