@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,36 @@ export class ValidatorsService {
     return null;
   };
 
+  // Función de validación personalizada para comparar contraseñas
+  public passwordMatchValidator(): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get('password');
+      const confirmPasswordControl = formGroup.get('confirmPassword');
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      const passwordValue = passwordControl.value;
+      const confirmPasswordValue = confirmPasswordControl.value;
+
+      // Compara los valores de las contraseñas
+      if (passwordValue !== confirmPasswordValue) {
+        // Si no coinciden, establece un error de validación
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      }
+
+      // Si coinciden, no hay errores de validación
+      confirmPasswordControl.setErrors(null);
+      return null;
+    };
+  }
+
   isvalidField(form: FormGroup, field: string) {
     return form.controls[field].errors && form.controls[field].touched;
   }
+
+
 
 }

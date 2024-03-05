@@ -18,11 +18,10 @@ export class RegisterPageComponent {
     confirmPassword: ['123456', [Validators.required, Validators.minLength(6)]],
     email: [
       'a@b.com',
-      [Validators.required,
-      Validators.pattern(this.validatorsService.emailPattern),
-      [ this.emailValidatorService]]
+      [Validators.required, Validators.pattern(this.validatorsService.emailPattern)],
+      [ this.emailValidatorService]
     ],
-  })
+  }, { validators: this.validatorsService.passwordMatchValidator() })
 
 
   constructor(
@@ -39,8 +38,12 @@ export class RegisterPageComponent {
     this.registerForm.reset();
   }
 
+
+
   isvalidField(field: string) {
     return this.validatorsService.isvalidField(this.registerForm, field)
   }
 
 }
+
+
