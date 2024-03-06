@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { environment } from '../../../environments/environment.development';
-import { Region, SmallCountry } from '../interfaces/country.interface';
-import { Observable, of, tap } from 'rxjs';
+import { CountryModel, Region, SmallCountry } from '../interfaces/country.interface';
+import { Observable, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +24,15 @@ export class CountriesService {
   getCountriesByRegion( region: Region): Observable<SmallCountry[]> {
 
     if (!region) return of([]);
-
     const url = `${this.API}/region/${region}?fields=cca3,name,borders`
-    return this.http.get<SmallCountry[]>(url)
+    return this.http.get<CountryModel[]>(url)
       .pipe(
-        tap( response => console.log({response}))
+        map( (countries) => countries.map( (country) => ({
+          name: country.name.common,
+          cca3: country.cca3,
+          borders: country.borders ?? [] // ?? operador de covalencia nula es mejor que usar || [] encaso de que la propiedad llegue vacía
+        }))),
+        // tap( response => console.log({response}))
       )
   }
 }

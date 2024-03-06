@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
-import { Region } from '../../interfaces/country.interface';
-import { switchMap } from 'rxjs';
+import { Region, SmallCountry } from '../../interfaces/country.interface';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-selector-page',
@@ -17,6 +17,7 @@ export class SelectorPageComponent implements OnInit{
     borders: ['', Validators.required],
   })
 
+  countriesByRegion: SmallCountry[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -33,11 +34,11 @@ export class SelectorPageComponent implements OnInit{
   onRegionChange() {
     this.countriesForm.get('region')?.valueChanges
     .pipe(
-      switchMap( region => this.countriesService.getCountriesByRegion(region)),
+      tap( () => this.countriesForm.get('country')!.setValue('')),
+      switchMap( (region) => this.countriesService.getCountriesByRegion(region)),
     )
     .subscribe( (countries) => {
-      console.log({countries});
-
+      this.countriesByRegion = countries;
     })
   }
 
