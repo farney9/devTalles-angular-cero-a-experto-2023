@@ -24,6 +24,18 @@
       </div>
     </div>
   }
+  <!-- Fronteras -->
+  @if (borders.length > 0) {
+    <div  class="row mb-3">
+      <div class="col">
+        <label class="form-label">Fronteras:</label>
+        <select formControlName="border" class="form-control">
+          <option value="">-- Seleccione Frontera--</option>
+          <option *ngFor="let border of borders" [value]="border">{{ border }}</option>
+        </select>
+      </div>
+    </div>
+  }
 
 </form>
 

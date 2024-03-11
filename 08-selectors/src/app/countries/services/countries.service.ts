@@ -22,9 +22,8 @@ export class CountriesService {
   }
 
   getCountriesByRegion( region: Region): Observable<SmallCountry[]> {
-
     if (!region) return of([]);
-    const url = `${this.API}/region/${region}?fields=cca3,name,borders`
+    const url = `${this.API}/region/${region}?fields=cca3,name,borders`;
     return this.http.get<CountryModel[]>(url)
       .pipe(
         map( (countries) => countries.map( (country) => ({
@@ -33,6 +32,21 @@ export class CountriesService {
           borders: country.borders ?? [] // ?? operador de covalencia nula es mejor que usar || [] encaso de que la propiedad llegue vacía
         }))),
         // tap( response => console.log({response}))
+      );
+  }
+
+  getCountryByAlphaCode(alphaCode : string): Observable<SmallCountry> {
+    console.log({alphaCode});
+
+    const url = `${this.API}/alpha/${alphaCode}?fields=cca3,name,borders`;
+
+    return this.http.get<CountryModel>(url)
+      .pipe(
+        map( (country) => ({
+          name: country.name.common,
+          cca3: country.cca3,
+          borders: country.borders ?? [],
+        }))
       )
   }
 }
