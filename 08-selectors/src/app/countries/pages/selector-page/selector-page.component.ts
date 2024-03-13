@@ -18,7 +18,7 @@ export class SelectorPageComponent implements OnInit{
   })
 
   countriesByRegion: SmallCountry[] = [];
-  borders: string[] = [];
+  borders: SmallCountry[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -50,10 +50,11 @@ export class SelectorPageComponent implements OnInit{
       tap( () => this.countriesForm.get('border')!.setValue('')),
       filter( (value: string) => value.length > 0 ),
       switchMap( (alphaCode) => this.countriesService.getCountryByAlphaCode(alphaCode)),
+      switchMap( (country) => this.countriesService.getCountriesBordersNameByCode(country.borders)),
     )
-    .subscribe( (country) => {
-      this.borders = country.borders;
-      console.log({borders: country.borders});
+    .subscribe( (countries) => {
+      this.borders = countries
+      console.log({borders: this.borders});
 
       // this.countriesByRegion = countries;
     })
