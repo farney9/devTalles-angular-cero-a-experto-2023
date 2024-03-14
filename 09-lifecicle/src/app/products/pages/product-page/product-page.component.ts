@@ -16,6 +16,7 @@ export class ProductPageComponent implements
   OnDestroy {
 
   isProductVisible: boolean = false;
+  currentPrice: number = 10;
 
   constructor() { console.log('constructor called'); } // 1 - constructor called
 
@@ -50,7 +51,10 @@ export class ProductPageComponent implements
   }
   ngOnDestroy(): void {
     console.log('ngOnDestroy called');
+  }
 
+  increasePrice() {
+    this.currentPrice ++;
   }
 
 }
