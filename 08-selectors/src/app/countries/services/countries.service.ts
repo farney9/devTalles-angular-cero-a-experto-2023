@@ -21,12 +21,12 @@ export class CountriesService {
     return [...this._regions];
   }
 
-  getCountriesByRegion( region: Region): Observable<SmallCountry[]> {
+  getCountriesByRegion(region: Region): Observable<SmallCountry[]> {
     if (!region) return of([]);
     const url = `${this.API}/region/${region}?fields=cca3,name,borders`;
     return this.http.get<CountryModel[]>(url)
       .pipe(
-        map( (countries) => countries.map( (country) => ({
+        map((countries) => countries.map((country) => ({
           name: country.name.common,
           cca3: country.cca3,
           borders: country.borders ?? [] // ?? operador de covalencia nula es mejor que usar || [] encaso de que la propiedad llegue vacía
@@ -35,13 +35,13 @@ export class CountriesService {
       );
   }
 
-  getCountryByAlphaCode(alphaCode : string): Observable<SmallCountry> {
+  getCountryByAlphaCode(alphaCode: string): Observable<SmallCountry> {
     // console.log({alphaCode});
     const url = `${this.API}/alpha/${alphaCode}?fields=cca3,name,borders`;
 
     return this.http.get<CountryModel>(url)
       .pipe(
-        map( (country) => ({
+        map((country) => ({
           name: country.name.common,
           cca3: country.cca3,
           borders: country.borders ?? [],
@@ -49,19 +49,15 @@ export class CountriesService {
       )
   }
 
-  getCountriesBordersNameByCode( borders: string[]): Observable<SmallCountry[]> {
+  getCountriesBordersNameByCode(borders: string[]): Observable<SmallCountry[]> {
     if (!borders || borders.length === 0) return of([]);
 
     const countriesRequest: Observable<SmallCountry>[] = [];
 
-    borders.forEach(  (code) => {
+    borders.forEach((code) => {
       const request = this.getCountryByAlphaCode(code);
       countriesRequest.push(request);
     })
-
     return combineLatest(countriesRequest);
-
-
   }
-
 }
