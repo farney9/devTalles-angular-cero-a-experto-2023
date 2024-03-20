@@ -15,8 +15,7 @@ export class ZoomRangePageComponent implements AfterViewInit, OnDestroy {
   map?: Map;
   currrentLngLat:LngLat = new LngLat(-75.55, 6.22);
 
-  ngAfterViewInit(): void {
-
+  ngAfterViewInit() {
     if (!this.divMap) throw 'El elemento HTML no fue encontrado';
 
     this.map = new Map({
