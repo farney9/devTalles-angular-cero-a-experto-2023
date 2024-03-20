@@ -13,7 +13,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
   currentZoom = 4;
   map?: Map;
-  currrentLngLat:LngLat = new LngLat(-75.55, 6.22);
+  currrentLngLat: LngLat = new LngLat(-75.55, 6.22);
 
   ngAfterViewInit() {
     if (!this.divMap) throw 'El elemento HTML no fue encontrado';
@@ -26,15 +26,36 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       zoom: this.currentZoom // starting zoom
     });
 
-/*     const markerHtml = document.createElement('div');
-    markerHtml.innerHTML = 'Hola Mundo';
+    /*     const markerHtml = document.createElement('div');
+        markerHtml.innerHTML = 'Hola Mundo';
+
+        const marker = new Marker({
+          color: 'red',
+          draggable: true,
+          element: markerHtml
+        }).setLngLat(this.currrentLngLat)
+        .addTo(this.map); */
+  }
+
+  createMarker() {
+    if (!this.map) return;
+
+    const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
+    const lngLat = this.map.getCenter();
+
+    this.addMarker(lngLat, color);
+  }
+
+  addMarker(lngLat: LngLat, color: string = 'red') {
+    if (!this.map) return;
 
     const marker = new Marker({
-      color: 'red',
-      draggable: true,
-      element: markerHtml
-    }).setLngLat(this.currrentLngLat)
-    .addTo(this.map); */
+      color: color,
+      draggable: true
+    })
+      .setLngLat(lngLat)
+      .addTo(this.map!);
+
   }
 
   ngOnDestroy() {
