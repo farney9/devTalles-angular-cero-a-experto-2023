@@ -25,7 +25,8 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
     this.map = new Map({
       container: this.divMap?.nativeElement,
-      style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
+      style: './assets/maplibre-gl-styles.json', // stylesheet location
+      // style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
       center: this.currrentLngLat, // starting position [lng, lat]
       zoom: this.currentZoom // starting zoom
     });
@@ -60,6 +61,16 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
     this.markersList[index].marker.remove();
     this.markersList.splice(index, 1);
+  }
+
+  flyToMarker(marker: MarkerModel) {
+    this.map?.flyTo({
+      center: marker.marker.getLngLat(),
+      essential: true,
+      zoom: 6,
+      animate: true,
+    });
+
   }
 
   ngOnDestroy() {

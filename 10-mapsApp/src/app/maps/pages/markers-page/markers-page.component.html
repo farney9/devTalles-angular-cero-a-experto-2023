@@ -6,6 +6,7 @@
     class="list-group-item">
     Marker:
     <span
+    (click)="flyToMarker(colorMarker)"
       (dblclick)="deleteMarker(i)"
       [ngStyle]="{'background-color': colorMarker.color}"
       class="badge"> {{ i + 1 }}
