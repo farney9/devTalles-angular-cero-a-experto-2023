@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { LngLat, Map, Marker } from 'maplibre-gl';
 
+interface MarkerModel {
+  color: string;
+  marker: Marker
+}
 
 @Component({
   selector: 'app-markers-page',
@@ -14,6 +18,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
   currentZoom = 4;
   map?: Map;
   currrentLngLat: LngLat = new LngLat(-75.55, 6.22);
+  markersList: MarkerModel[] = [];
 
   ngAfterViewInit() {
     if (!this.divMap) throw 'El elemento HTML no fue encontrado';
@@ -22,19 +27,8 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       container: this.divMap?.nativeElement,
       style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
       center: this.currrentLngLat, // starting position [lng, lat]
-      // center: [-75.5599231, 6.2251537], // starting position [lng, lat]
       zoom: this.currentZoom // starting zoom
     });
-
-    /*     const markerHtml = document.createElement('div');
-        markerHtml.innerHTML = 'Hola Mundo';
-
-        const marker = new Marker({
-          color: 'red',
-          draggable: true,
-          element: markerHtml
-        }).setLngLat(this.currrentLngLat)
-        .addTo(this.map); */
   }
 
   createMarker() {
@@ -44,6 +38,8 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
     const lngLat = this.map.getCenter();
 
     this.addMarker(lngLat, color);
+    console.log(this.markersList);
+
   }
 
   addMarker(lngLat: LngLat, color: string = 'red') {
@@ -56,6 +52,14 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       .setLngLat(lngLat)
       .addTo(this.map!);
 
+    this.markersList.push({color, marker });
+  }
+
+  deleteMarker(index: number) {
+    if (!this.map) return;
+
+    this.markersList[index].marker.remove();
+    this.markersList.splice(index, 1);
   }
 
   ngOnDestroy() {
