@@ -1,1 +1,32 @@
-<p>properties-page works!</p>
+<div class="row mt-3">
+  <div class="col offset-3">
+    <h3>Properties</h3>
+    <hr>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col offset-3">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div *ngFor="let property of properties" class="col">
+        <div class="card h-100 hvr-grow">
+          <img src="..." class="card-img-top" [alt]="property.title">
+          <div class="card-body">
+            <h5 class="card-title">{{property.title}}</h5>
+            <p class="card-text">{{property.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<!--     <div class="row">
+      <div class="col-4 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Property 1</h5>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
