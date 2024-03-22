@@ -11,6 +11,7 @@ import { MarkersPageComponent } from './pages/markers-page/markers-page.componen
 import { PropertiesPageComponent } from './pages/properties-page/properties-page.component';
 import { ZoomRangePageComponent } from './pages/zoom-range-page/zoom-range-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CounterAloneComponent } from '../alone/components/counter-alone/counter-alone.component';
 
 
 @NgModule({
@@ -22,11 +23,12 @@ import { FooterComponent } from './components/footer/footer.component';
     MarkersPageComponent,
     PropertiesPageComponent,
     ZoomRangePageComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,
-    MapsRoutingModule
+    MapsRoutingModule,
+    CounterAloneComponent
   ]
 })
 export class MapsModule { }
