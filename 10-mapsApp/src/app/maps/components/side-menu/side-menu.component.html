@@ -1,5 +1,4 @@
 <ul class="list-group">
-
   @for(item of menuItems; track item) {
     <li
       [routerLink]="[item.route]"
@@ -8,12 +7,4 @@
       {{item.name}}
     </li>
   }
-
-<!--   <li
-    *ngFor="let item of menuItems"
-    [routerLink]="[item.route]"
-    routerLinkActive="active"
-    class="list-group-item">
-    {{item.name}}
-  </li> -->
 </ul>

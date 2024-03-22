@@ -18,7 +18,7 @@ export class FullScreenPageComponent implements AfterViewInit{
       container: this.divMap?.nativeElement,
       style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
       center: [-75.5599231, 6.2251537], // starting position [lng, lat]
-      zoom: 9 // starting zoom
+      zoom: 4 // starting zoom
     });
 
   }

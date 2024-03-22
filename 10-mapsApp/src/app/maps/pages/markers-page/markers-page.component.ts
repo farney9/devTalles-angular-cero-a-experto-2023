@@ -74,6 +74,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
     this.markersList[index].marker.remove();
     this.markersList.splice(index, 1);
+    this.saveToLocalStorage();
   }
 
   flyToMarker(marker: MarkerModel) {
