@@ -5,6 +5,10 @@ interface MarkerModel {
   color: string;
   marker: Marker
 }
+interface PlainMarkerModel {
+  color: string;
+  lngLat: number[];
+}
 
 @Component({
   selector: 'app-markers-page',
@@ -30,6 +34,8 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       center: this.currrentLngLat, // starting position [lng, lat]
       zoom: this.currentZoom // starting zoom
     });
+
+    this.readFromLocalStorage();
   }
 
   createMarker() {
@@ -39,7 +45,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
     const lngLat = this.map.getCenter();
 
     this.addMarker(lngLat, color);
-    console.log(this.markersList);
+    // console.log(this.markersList);
 
   }
 
@@ -53,7 +59,8 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       .setLngLat(lngLat)
       .addTo(this.map!);
 
-    this.markersList.push({color, marker });
+    this.markersList.push({ color, marker });
+    this.saveToLocalStorage();
   }
 
   deleteMarker(index: number) {
@@ -70,7 +77,29 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       zoom: 6,
       animate: true,
     });
+  }
 
+  saveToLocalStorage() {
+    const plainMarkers: PlainMarkerModel[] = this.markersList.map(({ color, marker }) => {
+      return {
+        color,
+        lngLat: marker.getLngLat().toArray()
+      }
+    });
+    localStorage.setItem('plainMarkers', JSON.stringify(plainMarkers));
+
+  }
+
+  readFromLocalStorage() {
+    const plainMarkers = localStorage.getItem('plainMarkers') ?? '[]';
+    const markers: PlainMarkerModel[] = JSON.parse(plainMarkers);
+    console.log({ markers });
+
+    markers.forEach(({lngLat, color}) => {
+      const [lng, lat] = lngLat;
+      const coords = new LngLat(lng, lat);
+      this.addMarker(coords, color);
+    });
   }
 
   ngOnDestroy() {
