@@ -12,7 +12,7 @@ export class CustomLabelDirective implements OnInit{
   }
 
   @Input() set errors(value: ValidationErrors | null | undefined) {
-    console.log(value);
+    // console.log(value);
 
     this._errors = value;
     if (this._errors) {
