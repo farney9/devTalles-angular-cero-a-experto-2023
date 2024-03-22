@@ -100,7 +100,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
   readFromLocalStorage() {
     const plainMarkers = localStorage.getItem('plainMarkers') ?? '[]';
     const markers: PlainMarkerModel[] = JSON.parse(plainMarkers);
-    console.log({ markers });
+    // console.log({ markers });
 
     markers.forEach(({lngLat, color}) => {
       const [lng, lat] = lngLat;
