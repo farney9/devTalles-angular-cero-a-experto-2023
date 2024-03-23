@@ -1,1 +1,11 @@
-<p>counter-page works!</p>
+<h3>Counter: {{ counter() }}</h3>
+<hr>
+<h3>Square Counter: {{ squareCounter() }}</h3>
+<hr>
+<div class="d-inline-flex gap-2 mt-3">
+  <button (click)="increaseBy(-1)"  class="btn btn-danger">-1</button>
+  <button (click)="counter.set(5)"  class="btn btn-outline-secondary">Reset</button>
+  <button (click)="increaseBy(+1)" class="btn btn-success">+1</button>
+</div>
+
+
