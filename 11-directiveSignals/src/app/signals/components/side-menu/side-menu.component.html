@@ -1,0 +1,13 @@
+
+
+
+<ul *ngFor="let item of menuItems()" class="list-group" data-bs-theme-value="dark">
+  <li
+    class="list-group-item"
+    [routerLink]="[item.route]"
+    routerLinkActive="active">
+    {{item.title}}
+  </li>
+</ul>
+
+<!-- <pre>{{menuItems() | json}}</pre> -->
