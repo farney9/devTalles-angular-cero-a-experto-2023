@@ -1,1 +1,24 @@
-<p>properties-page works!</p>
+<h3>Mutaciones</h3>
+<hr>
+<div class="row">
+  <div class="col-6">
+    <input
+      #txtEmail type="text" class="form-control mb-2" placeholder="Email"
+      (input)="onFieldUpdated('email', txtEmail.value)" [value]="user().email">
+    <input
+      #txtFirstName type="text" class="form-control mb-2" placeholder="Firts Name"
+      (input)="onFieldUpdated('first_name', txtFirstName.value)" [value]="user().first_name">
+    <input
+      #txtLastName type="text" class="form-control mb-2" placeholder="Last Name"
+      (input)="onFieldUpdated('last_name', txtLastName.value)" [value]="user().last_name">
+  </div>
+  <div class="col-6">
+    <!-- Data del usuario -->
+    <pre>{{ user() | json }}</pre>
+    <h5>Full Name</h5>
+    {{ fullName() }}
+    <button (click)="increaseBy(+1)" class="btn btn-primary">
+      +1
+    </button>
+  </div>
+</div>

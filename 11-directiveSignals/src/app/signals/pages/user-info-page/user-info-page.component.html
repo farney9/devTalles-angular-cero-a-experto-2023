@@ -9,17 +9,13 @@
     </div>
   </div>
   <div *ngIf="currentUser()" class="col-8">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">User</h5>
-        <p class="card-text">Email: {{currentUser()!.email}}</p>
-        <p class="card-text">Name: {{fullName()}}</p>
-      </div>
-      <img [src]="currentUser()?.avatar" class="card-img-top img-fluid mx-auto img-thumbnail" alt="Avatar">
-    </div>
+
+    <h5>User</h5>
+    <p>Email: {{currentUser()!.email}}</p>
+    <p>Name: {{fullName()}}</p>
+    <img [src]="currentUser()?.avatar" class="img-fluid mx-auto img-thumbnail" alt="Avatar">
   </div>
   <div *ngIf="!wasUserFound()" class="col-8 text-danger">
     <h4>User not found</h4>
   </div>
 </div>
-
