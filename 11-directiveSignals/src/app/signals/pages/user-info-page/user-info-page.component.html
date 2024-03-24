@@ -1,1 +1,25 @@
-<p>user-info-page works!</p>
+<h3>User details</h3>
+<hr>
+<div class="row">
+  <div class="col-4">
+    <h4>Current User: {{ userId() }}</h4>
+    <div class="d-inline-flex gap-2 mt-3">
+      <button (click)="loadUser(userId() - 1 )" class="btn btn-primary">Previous</button>
+      <button (click)="loadUser(userId() + 1 )" class="btn btn-success">Next</button>
+    </div>
+  </div>
+  <div *ngIf="currentUser()" class="col-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">User</h5>
+        <p class="card-text">Email: {{currentUser()!.email}}</p>
+        <p class="card-text">Name: {{currentUser()?.first_name}} {{currentUser()?.last_name}}</p>
+      </div>
+      <img [src]="currentUser()?.avatar" class="card-img-top img-fluid mx-auto img-thumbnail" alt="Avatar">
+    </div>
+  </div>
+  <div *ngIf="!currentUser()" class="col-8 text-danger">
+    <h4>User not found</h4>
+  </div>
+</div>
+
