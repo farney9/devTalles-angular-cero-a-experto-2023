@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../interfaces/user.response..interface';
 
@@ -13,6 +13,10 @@ export class UserInfoPageComponent implements OnInit {
   userId = signal(1);
   currentUser = signal<User | undefined>(undefined);
   wasUserFound = signal(true);
+  fullName = computed<string>(() => {
+    if (!this.currentUser()) return 'User not found';
+    return `${this.currentUser()?.first_name} ${this.currentUser()?.last_name}`;
+  })
 
   ngOnInit(): void {
     this.loadUser(this.userId());
