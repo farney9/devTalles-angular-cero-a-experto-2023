@@ -29,14 +29,17 @@
 ## Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
 ## Ejecutar la imagen de Docker
 
 ```bash
+# levantar la base de datos
 $ docker compose up -d
 ```
+
+### Copiar el ```.env.template``` y renombrarlo  a ```.env``` cambiar cadena de conexión de la bd
 
 ## Running the app
 
