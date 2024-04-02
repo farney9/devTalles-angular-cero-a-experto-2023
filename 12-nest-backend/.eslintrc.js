@@ -22,10 +22,5 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    'linebreak-style': 0,
-    // Permite espacios en blanco al final de las líneas
-    'no-trailing-spaces': ['error', { 'skipBlankLines': true, 'ignoreComments': true }],
-    // Permite espacios en blanco irregulares
-    'no-irregular-whitespace': ['error', { 'skipStrings': true, 'skipComments': true, 'skipRegExps': true, 'skipTemplates': true }],
   },
 };

@@ -2,15 +2,17 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import * as bcryptjs from "bcryptjs";
+import * as bcryptjs from 'bcryptjs';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { User } from './entities/user.entity';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +37,6 @@ export class AuthService {
         ...userData,
       });
       await newUser.save();
-
       /*
       El código utiliza la desestructuración de objetos en TypeScript para extraer propiedades específicas de un objeto newUser y asignarlas a una nueva variable llamada user.
 
@@ -55,6 +56,33 @@ export class AuthService {
       }
       throw new InternalServerErrorException('Error creating user');
     }
+  }
+
+ async login(loginDto: LoginDto) {
+
+    const { email, password } = loginDto;
+    // 1 - Verificar que el usuario exista
+    // 2 - Verificar que la contraseña sea correcta
+    // 3 - Generar el JWT
+    // 4 - Manejar las excepciones
+
+    const user = await this.userModel.findOne({ email });
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    if (!(await bcryptjs.compare(password, user.password))) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    const { password: _, ...result } = user.toJSON();
+
+    return {
+      user: result,
+      token: 'ABC-123'
+    }
+
+
   }
 
   findAll() {
