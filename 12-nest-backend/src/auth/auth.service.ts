@@ -9,11 +9,10 @@ import { Model } from 'mongoose';
 import * as bcryptjs from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { CreateUserDto, UpdateAuthDto, LoginDto, RegisterUserDto } from './dto';
 import { User } from './entities/user.entity';
-import { LoginDto } from './dto/login.dto';
 import { JwtPayload } from './interfaces/jwt.interface';
+import { LoginResponse } from './interfaces/login-response';
 @Injectable()
 export class AuthService {
   constructor(
@@ -67,7 +66,15 @@ export class AuthService {
     return token;
   }
 
-  async login(loginDto: LoginDto) {
+  async register(registerUserDto: RegisterUserDto): Promise<LoginResponse> {
+    const user = await this.create(registerUserDto);
+    console.log(user);
+    
+    const token = this.getJwtToken({ id: user._id });
+    return { user, token };
+  }
+
+  async login(loginDto: LoginDto): Promise<LoginResponse> {
 
     const { email, password } = loginDto;
     // 1 - Verificar que el usuario exista
