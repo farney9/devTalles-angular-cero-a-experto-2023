@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 
 import { environment } from '../../../environments/environment.development';
@@ -41,10 +41,12 @@ export class AuthService {
           console.log({ user, token });
 
         }),
-        map(() => true)
-
+        map(() => true),
+        
         // TODO: Manejo de errores
 
+        // catchError recibe una función que devuelve un observable, en este caso se usa throwError para devolver un observable que emite un error.
+        catchError(err => throwError(() => err.error.message))
       )
   }
 }

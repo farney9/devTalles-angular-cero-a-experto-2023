@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2'
 
 const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 @Component({
@@ -28,9 +29,10 @@ export class LoginPageComponent {
 
     this.authService.login(email, password)
       .subscribe({
-        next: (success) => console.log({success}),
-        error: (err) => console.log(err)
+        next: (success) => console.log('Todo bien!!'),
+        error: (message) => {
+          Swal.fire('Error', message, 'error');
+        }
       });
   }
-
 }
