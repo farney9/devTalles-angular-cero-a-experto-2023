@@ -23,14 +23,17 @@ export class AuthService {
   // Devuelve el valor actual de la señal _authStatus, authStatus es una señal computada.
   authStatus = computed(() => this._authStatus());
 
-  constructor() { }
+  constructor() {
+
+    this.verifyAuthStatus().subscribe();
+  }
 
   private setAuthentication(user: User, token: string): boolean {
     // Actualiza el valor de la señal _currentUser con el valor de response.user
     this._currentUser.set(user);
     // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Authenticated
     this._authStatus.set(AuthStatus.Authenticated);
-    console.log({ user, token });
+    // console.log({ user, token });
     localStorage.setItem('token', token);
 
     return true;

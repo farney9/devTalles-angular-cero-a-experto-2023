@@ -14,11 +14,14 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const authStatus = authService.authStatus();
 
 
-  if (authStatus === AuthStatus.Authenticated) return true;
+  if (authStatus === AuthStatus.Checking) return false;
+  if (authStatus === AuthStatus.Authenticated) {
+    const url = state.url;
+    localStorage.setItem('redirectUrl', url);
+    return true;
+  };
 
 
-/*   const url = state.url;
-  localStorage.setItem('redirectUrl', url); */
 
   router.navigateByUrl('/auth/login');
 
