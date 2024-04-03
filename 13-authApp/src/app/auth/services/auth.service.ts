@@ -25,6 +25,18 @@ export class AuthService {
 
   constructor() { }
 
+  private setAuthentication(user: User, token: string): boolean {
+    // Actualiza el valor de la señal _currentUser con el valor de response.user
+    this._currentUser.set(user);
+    // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Authenticated
+    this._authStatus.set(AuthStatus.Authenticated);
+    console.log({ user, token });
+    localStorage.setItem('token', token);
+
+    return true;
+
+  }
+
   login(email: string, password: string): Observable<boolean> {
 
     const url = `${this.apiUrl}/auth/login`;
@@ -32,16 +44,7 @@ export class AuthService {
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
-        tap(({ user, token }) => {
-          localStorage.setItem('token', token);
-          // Actualiza el valor de la señal _currentUser con el valor de response.user
-          this._currentUser.set(user);
-          // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Authenticated
-          this._authStatus.set(AuthStatus.Authenticated);
-          console.log({ user, token });
-
-        }),
-        map(() => true),
+        map(({ user, token }) => this.setAuthentication(user, token)),
 
         // TODO: Manejo de errores
 
@@ -60,15 +63,7 @@ export class AuthService {
 
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
-        tap(({ user, token }) => {
-          localStorage.setItem('token', token);
-          // Actualiza el valor de la señal _currentUser con el valor de response.user
-          this._currentUser.set(user);
-          // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Authenticated
-          this._authStatus.set(AuthStatus.Authenticated);
-          console.log({ user, token });
-        }),
-        map(() => true),
+        map(({ user, token }) => this.setAuthentication(user, token)),
         catchError(() => {
           localStorage.removeItem('token');
           // Actualiza el valor de la señal _currentUser con el valor de null
