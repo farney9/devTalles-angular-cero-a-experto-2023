@@ -109,6 +109,15 @@ export class AuthService {
     return this.userModel.findById(id).select('-password');
   }
 
+  async RenewToken(userId: string): Promise<LoginResponse>{
+    const user = await this.findUserById(userId);
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+    return { user, token: this.getJwtToken({ id: user._id }) };
+
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} auth`;
   }
