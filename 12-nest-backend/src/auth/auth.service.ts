@@ -105,6 +105,10 @@ export class AuthService {
     return this.userModel.find();
   }
 
+  findUserById(id: string): Promise<User> {
+    return this.userModel.findById(id).select('-password');
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} auth`;
   }
