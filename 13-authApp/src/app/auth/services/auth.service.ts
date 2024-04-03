@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 
 import { environment } from '../../../environments/environment.development';
-import { AuthStatus, LoginResponse, User } from '../interfaces';
+import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,11 +42,42 @@ export class AuthService {
 
         }),
         map(() => true),
-        
+
         // TODO: Manejo de errores
 
         // catchError recibe una función que devuelve un observable, en este caso se usa throwError para devolver un observable que emite un error.
         catchError(err => throwError(() => err.error.message))
       )
+  }
+
+  verifyAuthStatus(): Observable<boolean> {
+    const url = `${this.apiUrl}/auth/renew-token`;
+    const token = localStorage.getItem('token');
+
+    if (!token) return of(false);
+
+    const headers = { Authorization: `Bearer ${token}` };
+
+    return this.http.get<CheckTokenResponse>(url, { headers })
+      .pipe(
+        tap(({ user, token }) => {
+          localStorage.setItem('token', token);
+          // Actualiza el valor de la señal _currentUser con el valor de response.user
+          this._currentUser.set(user);
+          // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Authenticated
+          this._authStatus.set(AuthStatus.Authenticated);
+          console.log({ user, token });
+        }),
+        map(() => true),
+        catchError(() => {
+          localStorage.removeItem('token');
+          // Actualiza el valor de la señal _currentUser con el valor de null
+          this._currentUser.set(null);
+          // Actualiza el valor de la señal _authStatus con el valor de AuthStatus.Unauthenticated
+          this._authStatus.set(AuthStatus.Unauthenticated);
+          return of(false);
+        })
+      )
+
   }
 }
