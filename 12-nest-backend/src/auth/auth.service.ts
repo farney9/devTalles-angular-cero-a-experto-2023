@@ -69,7 +69,7 @@ export class AuthService {
   async register(registerUserDto: RegisterUserDto): Promise<LoginResponse> {
     const user = await this.create(registerUserDto);
     console.log(user);
-    
+
     const token = this.getJwtToken({ id: user._id });
     return { user, token };
   }
@@ -101,8 +101,8 @@ export class AuthService {
 
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  findAll(): Promise<User[]> {
+    return this.userModel.find();
   }
 
   findOne(id: number) {
