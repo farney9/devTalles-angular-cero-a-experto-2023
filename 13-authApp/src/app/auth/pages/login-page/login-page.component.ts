@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 @Component({
@@ -10,17 +11,26 @@ const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 export class LoginPageComponent {
 
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
-myForm = this.fb.group({
-  email: ['a@b.com', [Validators.required, Validators.pattern(emailPattern)]],
-  password: ['123456', [Validators.required, Validators.minLength(6)]],
-});
+  myForm = this.fb.group({
+    email: ['farney@google.com', [Validators.required, Validators.pattern(emailPattern)]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
+  });
 
-login() {
-  console.log(this.myForm.value);
-  if (this.myForm.valid) {
-    // Call the login service
+  login() {
+    if (this.myForm.invalid) return;
+
+    const email = this.myForm.value.email;
+    const password = this.myForm.value.password;
+
+    if (!email || !password) return;
+
+    this.authService.login(email, password)
+      .subscribe({
+        next: (success) => console.log({success}),
+        error: (err) => console.log(err)
+      });
   }
-}
 
 }
