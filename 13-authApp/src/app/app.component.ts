@@ -17,6 +17,7 @@ export class AppComponent {
     if (this.authService.authStatus() === AuthStatus.Checking) {
       return false;
     }
+    
     return true;
   })
 
@@ -27,8 +28,8 @@ export class AppComponent {
       case AuthStatus.Checking:
         break;
       case AuthStatus.Authenticated:
-        const redirectUrl = localStorage.getItem('redirectUrl');
-        this.router.navigateByUrl(redirectUrl!);
+        // const redirectUrl = localStorage.getItem('redirectUrl');
+        this.router.navigateByUrl(localStorage.getItem('redirectUrl') || '/dashboard');
         break;
       case AuthStatus.Unauthenticated:
         this.router.navigateByUrl('/auth/login');

@@ -3,10 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2'
+import { AuthService } from '../../services/auth.service';
+import { emailPattern } from '../../interfaces';
 
-const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
