@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
+  selector: 'app-control-flow-page',
   standalone: true,
   imports: [],
   templateUrl: './control-flow-page.component.html',
   styles: ``
 })
-export class ControlFlowPageComponent {
+export default class ControlFlowPageComponent {
 
 }

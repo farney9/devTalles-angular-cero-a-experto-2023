@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
+  selector: 'app-change-detection-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './change-detection-page.component.html',
   styles: ``
 })
-export class ChangeDetectionPageComponent {
+export default class ChangeDetectionPageComponent {
 
 }
