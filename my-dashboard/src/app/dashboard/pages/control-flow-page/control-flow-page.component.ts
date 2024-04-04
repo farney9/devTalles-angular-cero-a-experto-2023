@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-control-flow-page',
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export default class ControlFlowPageComponent {
+
+  showContent = signal(false);
+
+  toggleContent() {
+    this.showContent.update(value => !value);
+  }
 
 }
