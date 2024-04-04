@@ -1,22 +1,36 @@
 <section class="grid grid-cols-1 md:grid-cols-2 gap-3">
-
   <!-- @if -->
   <div class="bg-white p-4 shadow rounded-lg">
     <h2 class="text-2xl font-bold mb-5">if: {{ showContent() }}</h2>
 
     <div class="mt-4">
-      <button
-        class="p-2 bg-blue-500 rounded-lg text-white"
-        (click)="toggleContent()">Click me!
+      <button class="p-2 mb-5 bg-blue-500 rounded-lg text-white" (click)="toggleContent()">Click me!
       </button>
     </div>
-
     @if (showContent()) {
     <p class="text-gray-600">Hola Mundo</p>
     } @else {
     <p class="text-gray-600">***********</p>
     }
   </div>
+    <!-- @switch -->
+    <div class="bg-white p-4 shadow rounded-lg">
+      <h4 class="text-2xl font-bold mb-5">Calificación: <span class="text-green-500 font-bold">{{grade()}}</span>
+      </h4>
 
-
+      @switch (grade()) {
+        @case('A') {
+          <p class="text-green-500 font-bold">Excelente: Arriba de 90</p>
+        }
+        @case('B') {
+          <p class="text-green-500 font-bold">Muy bien: Arriba de 80</p>
+        }
+        @case('F') {
+          <p class="text-green-500 font-bold">Puedes hacerlo mejor:   Reprobado</p>
+        }
+        @default {
+          <p class="text-green-500 font-bold">Calificación no válida</p>
+        }
+      }
+    </div>
 </section>
