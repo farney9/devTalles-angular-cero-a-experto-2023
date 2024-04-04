@@ -39,6 +39,13 @@ npm install
 $ docker compose up -d
 ```
 
+## Detener la imagen de Docker
+
+```bash
+# levantar la base de datos
+$ docker compose down
+```
+
 ### Copiar el ```.env.template``` y renombrarlo  a ```.env``` cambiar cadena de conexión de la bd
 
 ## Running the app
@@ -52,6 +59,18 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+
+## Credeciales de la bd en MongoDB Atlas
+
+
+```bash
+# user
+authAppAdmin
+
+# password
+4ENy0REb0YznbUAF
+
 ```
 
 ## Test

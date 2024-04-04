@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "660b7d3f34a33e73be176c4e"
+  },
+  "email": "farney@google.com",
+  "isActive": true,
+  "name": "Farney",
+  "password": "$2a$10$wM.fSu6gtb6klFMjL1JjTe4Rus6.QIUlJDc/AlgoZHQfUY9HSbVkS",
+  "roles": [
+    "user"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c96ea318ac96fc409fa16"
+  },
+  "email": "melissa@google.com",
+  "isActive": true,
+  "name": "Melissa",
+  "password": "$2a$10$2fr2x3QaMnTHKajWQVCxDuq6g8BlhibBKkedv/AYUkl2pJRuj9/7S",
+  "roles": [
+    "user"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660dc4486c7813614aadf996"
+  },
+  "email": "nathy@google.com",
+  "isActive": true,
+  "name": "Natalia",
+  "password": "$2a$10$3TLEDGbNk1QMphlxrW/pvO2x2qduNbEZ/lY12G9GNfZXsLtfQF65G",
+  "roles": [
+    "user"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660dc8556c7813614aadf9ae"
+  },
+  "email": "01-wester@google.com",
+  "isActive": true,
+  "name": "01-wester",
+  "password": "$2a$10$2I4B2T9lWQHug8UOVDbwseu1uXbkdFYT5.2JwbF.R0oU5OVJumfm.",
+  "roles": [
+    "user"
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660dd1e51a34f9de86ec2448"
+  },
+  "email": "user@example.com",
+  "isActive": true,
+  "name": "01-user",
+  "password": "$2a$10$dCuj8c0GVBxkyqljh963AuEDkqWbaVtSscNZhqzzsugMkUQZrgPim",
+  "roles": [
+    "user"
+  ],
+  "__v": 0
+}]
