@@ -1,1 +1,18 @@
-<p>defer-options-page works!</p>
+<app-title title="Defer Triggers" />
+
+<section class="grid grid-cols-1">
+  <h1 class="text-2xl font-semibold">Interacciones</h1>
+  <hr class="my-2">
+
+  <!--
+    este código utiliza las directivas @defer y @placeholder para controlar cuándo se cargan y renderizan los componentes, mejorando así el rendimiento y la experiencia del usuario. -->
+  @defer (on interaction) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-blue-600 flex justify-center items-center">On interaction</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-purple-600 flex justify-center items-center">Click on Div</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
