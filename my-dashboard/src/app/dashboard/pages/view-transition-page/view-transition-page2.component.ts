@@ -9,11 +9,20 @@ import { TitleComponent } from '@shared/title/title.component';
   template: `
   <app-title title="View Transition Page 2" />
 
-  <section class="flex justify-start">
+  <section class="flex justify-end">
 
-  <img srcset="//picsum.photos/id/237/300/200.webp" width="300" height="200" alt="PicSum Photos">
+  <img
+    srcset="//picsum.photos/id/237/300/200.webp"
+    width="300"
+    height="200"
+    alt="PicSum Photos"
+    style="view-transition-name: hero1;"
+    >
 
-  <div class="bg-blue-500 w-56 h-56">
+  <div
+    class="fixed bottom-16 right-10 bg-blue-800 w-32 h-32 rounded"
+    style="view-transition-name: hero2;"
+    >
 
   </div>
   </section>
