@@ -5,7 +5,9 @@
   <hr class="my-2">
 
   <!--
-    este código utiliza las directivas @defer y @placeholder para controlar cuándo se cargan y renderizan los componentes, mejorando así el rendimiento y la experiencia del usuario. -->
+    este código utiliza las directivas @defer y @placeholder para controlar cuándo se cargan y renderizan los componentes, mejorando así el rendimiento y la experiencia del usuario.
+  Aunque el componente dentro de la directiva @defer no se renderiza inmediatamente, todavía se crea, lo que resulta en que se ejecute el constructor y se imprima el mensaje. Lo mismo ocurre con el componente dentro de la directiva @placeholder, que se crea y se renderiza inmediatamente.
+  -->
   @defer (on interaction) {
     <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
       <span class="text-white font-semibold h-20 bg-blue-600 flex justify-center items-center">On interaction</span>
@@ -13,6 +15,83 @@
   } @placeholder {
     <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
       <div class=" text-white font-semibold h-20 bg-purple-600 flex justify-center items-center">Click on Div</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
+
+<section>
+  <hr class="my-2">
+
+  <!--Hacer la carga solo cuando se hace click en un elemento  -->
+  <button
+    #btnInteraction
+    class="p-2 bg-blue-500 hover:bg-sky-700 transition-all rounded text-white my-2">
+    Click me
+  </button>
+
+  @defer (on interaction(btnInteraction)) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-blue-600 flex justify-center items-center">On interaction click - #btnInteraction</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-green-600 flex justify-center items-center">Placeholder Div</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
+<section>
+  <hr class="my-2">
+  <!--Hacer la carga solo cuando se hace hover en un elemento  -->
+  @defer (on hover) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-orange-400 flex justify-center items-center">On Over Placeholder Div</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-orange-600 flex justify-center items-center">Placeholder Div</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
+<section>
+  <hr class="my-2">
+  <!--Hacer la carga inmediatamente este disponible  -->
+  @defer (on immediate) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-lime-400 flex justify-center items-center">On immediate</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-lime-600 flex justify-center items-center">Placeholder Div</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
+<section>
+  <hr class="my-2">
+  <!--Hacer la carga solo cuando se pone un timmer a un elemento  -->
+  @defer (on timer(2500)) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-teal-400 flex justify-center items-center">On timer(2500)</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-teal-700 flex justify-center items-center">2.5 segundos</div>
+    </app-heavy-loaders-fast>
+  }
+</section>
+<section>
+  <hr class="my-2">
+
+<!--
+  En este caso, se está utilizando la condición "on hover" para cargar el elemento cuando el usuario pasa el cursor sobre él, y la condición "on idle" para cargar el elemento cuando la página está inactiva. Además, se utiliza la directiva @placeholder para mostrar un contenido de marcador de posición mientras el elemento se carga de manera diferida. Esto puede ser útil para mejorar el rendimiento de la página al cargar solo los elementos necesarios en el momento adecuado.
+ -->
+
+  @defer (on hover; prefetch on idle) {
+    <app-heavy-loaders-fast cssClass="bg-blue-700 h-20">
+      <span class="text-white font-semibold h-20 bg-purple-400 flex justify-center items-center">On hover, idle</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <div class=" text-white font-semibold h-20 bg-purple-700 flex justify-center items-center">hover</div>
     </app-heavy-loaders-fast>
   }
 </section>
