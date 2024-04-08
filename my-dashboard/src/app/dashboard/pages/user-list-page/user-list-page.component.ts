@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { UsersService } from '@services/users.service';
 
 @Component({
   selector: 'app-user-list-page',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export default class UserListPageComponent {
+
+  userList = inject(UsersService);
 
 }
