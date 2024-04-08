@@ -1,1 +1,24 @@
-<p>user-list-page works!</p>
+<app-title title="User List Page" />
+
+<!-- @if (!usersList.isLoading()) {
+
+
+
+} @else {
+
+} -->
+
+<ul>
+  @for (user of usersList.users(); track user.id) {
+    <li class="flex items-center my-2 cursor-pointer">
+      <img class="rounded w-14" [srcset]="user.avatar" [alt]="user.first_name + ' '+ user.last_name">
+      <a class="text-sky-800 font-semibold hover:underline mx-2" [routerLink]="['/dashboard/user', user.id]">
+        {{user.first_name}} {{ user.last_name}}
+      </a>
+    </li>
+  } @empty {
+    <div class="flex items-center justify-center h-64">
+      <h3 class="text-2xl text-gray-500">Loading ...</h3>
+    </div>
+  }
+</ul>

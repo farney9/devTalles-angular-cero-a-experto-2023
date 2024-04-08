@@ -1,9 +1,11 @@
-import { Injectable, signal } from '@angular/core';
-import { User } from '@interfaces/req-response.interface';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { User, UsersResponse } from '@interfaces/req-response.interface';
+import { delay } from 'rxjs';
 
 
 interface State {
-  user: User[];
+  users: User[];
   isLoading: boolean;
 
 }
@@ -15,18 +17,35 @@ interface State {
 })
 export class UsersService {
 
+  private http = inject(HttpClient);
+
   /*
   La almohadilla (#) antes de la declaración de la señal indica que se trata de una propiedad privada en TypeScript. Esto significa que solo se puede acceder a la propiedad dentro de la clase en la que está declarada.
   */
 
   #state = signal<State>({
     isLoading: true,
-    user: [],
+    users: [],
   });
+
+  public users = computed( () => this.#state().users);
+  public isLoading = computed( () => this.#state().isLoading);
 
   constructor() {
 
-    console.log('Cargando data..');
+    this.http.get<UsersResponse>('https://reqres.in/api/users/')
+      .pipe( delay(1300))
+      .subscribe( {
+        next: (response) => {
+          this.#state.set({
+            users: response.data,
+            isLoading: false,
+          })
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      } )
 
 
   }
