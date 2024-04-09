@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PlacesService } from '../../services';
 
 @Component({
   selector: 'app-maps-page',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './maps-page.component.sass'
 })
 export class MapsPageComponent {
+
+  private placesService = inject(PlacesService);
+
+  get isUserLocationReady(): boolean {
+    return this.placesService.isUserLocationReady;
+  }
 
 }
