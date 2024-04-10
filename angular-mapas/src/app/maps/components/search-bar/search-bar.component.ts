@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SearchResultsComponent } from 'src/app/maps/components/search-results/search-results.component';
 
 @Component({
@@ -11,8 +11,19 @@ import { SearchResultsComponent } from 'src/app/maps/components/search-results/s
 })
 export class SearchBarComponent {
 
-  search( query: string) {
-    console.log('searching for:', query);
+  private debounceTimer?: NodeJS.Timeout;
+
+  onSearchPlace(event: KeyboardEvent, query: string = ''.trim(), ) {
+    if (this.debounceTimer) clearTimeout(this.debounceTimer);
+
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',].includes(event.key) || !query) {
+      return;
+    }
+
+    this.debounceTimer = setTimeout(() => {
+      console.log('Searching for:', query);
+
+    }, 500);
   }
 
 }

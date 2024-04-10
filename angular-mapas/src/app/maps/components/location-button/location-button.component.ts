@@ -16,6 +16,6 @@ export class LocationButtonComponent {
     if (!this.placesService.isUserLocationReady) throw 'User location not set yet!';
     if (!this.mapService.isMapReady) throw 'Map not initialized yet!';
 
-    this.mapService.flyTo(this.placesService.userLocation!, 14);
+    this.mapService.flyTo(this.placesService.userLocation!);
   }
 }

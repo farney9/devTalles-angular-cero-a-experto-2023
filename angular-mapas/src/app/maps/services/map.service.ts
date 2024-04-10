@@ -16,11 +16,11 @@ export class MapService {
     this.map = map;
   }
 
-  flyTo(cords: LngLatLike, zoom: number) {
+  flyTo(cords: LngLatLike) {
     if (!this.isMapReady) throw 'Map not initialized yet!';
     this.map?.flyTo({
       center: cords,
-      zoom,
+      zoom: 15,
       essential: true,
       animate: true,
     });
