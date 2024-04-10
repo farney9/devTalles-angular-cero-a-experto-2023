@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Feature, PlacesResponse } from 'src/app/maps/interfaces/places.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlacesService {
 
+  private http = inject(HttpClient);
+
   userLocation?: [number, number];
   isLoading = false;
+  places: Feature[] = [];
 
   /*
   En el código, return !!this.userLocation; se utiliza para verificar si this.userLocation tiene un valor asignado. Si this.userLocation tiene un valor, la expresión !!this.userLocation se evaluará como true. Si this.userLocation es null, undefined, 0, false o una cadena vacía, la expresión se evaluará como false.
@@ -37,5 +42,16 @@ export class PlacesService {
       console.log('Error getting location', error);
       throw error;
     }
+  }
+
+  findPlacesByQuery(query: string='') {
+    // TODO: Evaluar cuando el query es nulo
+    this.isLoading = true;
+
+    this.http.get<PlacesResponse>(`https://nominatim.openstreetmap.org/search?q=${query}&format=geocodejson&limit=15`)
+      .subscribe((response) => {
+        this.isLoading = false;
+        this.places = response.features
+      });
   }
 }

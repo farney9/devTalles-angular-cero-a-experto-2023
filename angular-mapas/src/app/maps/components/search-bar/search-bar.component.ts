@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { PlacesService } from '@services/places.service';
 import { SearchResultsComponent } from 'src/app/maps/components/search-results/search-results.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { SearchResultsComponent } from 'src/app/maps/components/search-results/s
 export class SearchBarComponent {
 
   private debounceTimer?: NodeJS.Timeout;
+  private placesService = inject(PlacesService);
 
   onSearchPlace(event: KeyboardEvent, query: string = ''.trim(), ) {
     if (this.debounceTimer) clearTimeout(this.debounceTimer);
@@ -21,7 +23,8 @@ export class SearchBarComponent {
     }
 
     this.debounceTimer = setTimeout(() => {
-      console.log('Searching for:', query);
+      this.placesService.findPlacesByQuery(query);
+      // console.log('Searching for:', query);
 
     }, 500);
   }
