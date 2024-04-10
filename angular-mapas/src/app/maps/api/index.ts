@@ -1,1 +1,1 @@
-export { PlacesHttpService } from './places-http.service';
+export { PlacesHttpClient } from './places-http-client.service';

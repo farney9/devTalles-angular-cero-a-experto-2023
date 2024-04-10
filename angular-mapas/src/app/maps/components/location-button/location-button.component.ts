@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MapService, PlacesService } from '@services/index';
+import { MapService, PlacesService } from 'src/app/maps/services';
 
 @Component({
   selector: 'app-location-button',

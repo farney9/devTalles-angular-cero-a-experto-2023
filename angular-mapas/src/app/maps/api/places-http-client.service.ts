@@ -5,7 +5,7 @@ import { environment } from '@environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class PlacesHttpService extends HttpClient {
+export class PlacesHttpClient extends HttpClient {
 
   baseurl = environment.API_URL;
 
@@ -26,7 +26,6 @@ export class PlacesHttpService extends HttpClient {
       params: {
         'limit': 15,
         'accept-language': 'es',
-        'bounded': 1,
         'format': 'geocodejson',
        }
     }

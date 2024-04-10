@@ -1,13 +1,20 @@
-<div class="alert alert-primary mt-2 text-center">
+<div *ngIf="isLoadingPlaces" class="alert alert-primary mt-2 text-center">
   <h6>Loading</h6>
   <span>Please wait...</span>
 </div>
-<ul class="list-group">
-  <li class="list-group-item list-group-item-action pointer">
-    <h6>Place</h6>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <button class="btn btn-sm btn-outline-primary">
-      Addresses
-    </button>
-  </li>
-</ul>
+<div *ngIf="places.length > 0">
+  <ul *ngFor="let place of places" class="list-group">
+    <li
+      (click)="flyToPlace(place)"
+      [class.active]="place.properties.geocoding.place_id === selectedPlaceId"
+      class="list-group-item list-group-item-action pointer my-1">
+      <h6>{{place.properties.geocoding.name}}</h6>
+      <p>{{place.properties.geocoding.label}}</p>
+      <button
+        [ngClass]="(place.properties.geocoding.place_id === selectedPlaceId) ? 'btn-outline-light' : 'btn-outline-primary'"
+        class="btn btn-sm">
+        Addresses
+      </button>
+    </li>
+  </ul>
+</div>

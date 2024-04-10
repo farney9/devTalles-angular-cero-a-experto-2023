@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { PlacesService } from '@services/places.service';
+import { Component, inject } from '@angular/core';
 import { SearchResultsComponent } from 'src/app/maps/components/search-results/search-results.component';
+import { PlacesService } from 'src/app/maps/services';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,9 +18,9 @@ export class SearchBarComponent {
   onSearchPlace(event: KeyboardEvent, query: string = ''.trim(), ) {
     if (this.debounceTimer) clearTimeout(this.debounceTimer);
 
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',].includes(event.key) || !query) {
-      return;
-    }
+    if (
+      ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
+      || !query || query.trim() === '') return;
 
     this.debounceTimer = setTimeout(() => {
       this.placesService.findPlacesByQuery(query);

@@ -3,13 +3,12 @@ import { environment } from '@environments/environment.development';
 import { NgIf } from '@angular/common';
 import { FloatingCardComponent } from 'src/app/maps/components/floating-card/floating-card.component';
 import { LngLat, Map, Marker, Popup } from 'maplibre-gl';
-import { MapService, PlacesService } from '@services/index';
+import { MapService, PlacesService } from 'src/app/maps/services';
 
 
 @Component({
   selector: 'app-map-view',
   standalone: true,
-  // templateUrl: './map-view.component.html',
   template: `
   <div #mapDiv class="map-container"></div>
   `,
