@@ -65,7 +65,7 @@ export class PlacesService {
       .subscribe((response) => {
         this.isLoading = false;
         this.places = response.features
-        this.mapService.createMarkersFromPlaces(this.places);
+        this.mapService.createMarkersFromPlaces(this.places, this.userLocation ?? [0, 0]); // Pass the userLocation as the second argument with a default value of [0, 0]
       });
   }
 }
