@@ -31,7 +31,7 @@
             ],
             "styles": [
               "src/styles.sass",
-              "../node_modules/maplibre-gl/dist/maplibre-gl.css"
+              "node_modules/maplibre-gl/dist/maplibre-gl.css"
             ],
             "scripts": []
           },
