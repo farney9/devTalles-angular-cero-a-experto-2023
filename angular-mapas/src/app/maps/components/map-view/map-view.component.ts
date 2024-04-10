@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
-import { PlacesService } from '../../services';
 import { environment } from '@environments/environment.development';
 import { NgIf } from '@angular/common';
 import { FloatingCardComponent } from 'src/app/maps/components/floating-card/floating-card.component';
 import { LngLat, Map, Marker, Popup } from 'maplibre-gl';
+import { MapService, PlacesService } from '@services/index';
 
 
 @Component({
@@ -22,6 +22,7 @@ import { LngLat, Map, Marker, Popup } from 'maplibre-gl';
 })
 export class MapViewComponent implements OnInit, AfterViewInit {
 
+
   @ViewChild('mapDiv') mapDivElement!: ElementRef;
 
   map?: Map;
@@ -30,7 +31,8 @@ export class MapViewComponent implements OnInit, AfterViewInit {
   key = environment.API_KEY;
   color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
 
-  public placesService = inject(PlacesService);
+  private placesService = inject(PlacesService);
+  private mapService = inject(MapService);
 
   ngOnInit() {
     // console.log(this.placesService.userLocation);
@@ -61,8 +63,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
       .addTo( map )
 
 
-      this.map = map;
-    // console.log('Map:', this.map);
+      this.mapService.setMapInstance(map);
 
   }
 }

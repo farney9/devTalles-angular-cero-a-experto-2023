@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MapService, PlacesService } from '@services/index';
 
 @Component({
   selector: 'app-location-button',
@@ -8,11 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './location-button.component.sass'
 })
 export class LocationButtonComponent {
-
-
+  private placesService = inject(PlacesService);
+  private mapService = inject(MapService);
 
   goToMyLocation() {
-    console.log('Going to my location');
-  }
+    if (!this.placesService.isUserLocationReady) throw 'User location not set yet!';
+    if (!this.mapService.isMapReady) throw 'Map not initialized yet!';
 
+    this.mapService.flyTo(this.placesService.userLocation!, 14);
+  }
 }
