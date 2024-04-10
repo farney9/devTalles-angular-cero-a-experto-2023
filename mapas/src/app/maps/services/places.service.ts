@@ -22,23 +22,20 @@ export class PlacesService {
   }
 
   async getUserLocation(): Promise<[number, number]> {
-    this.isLoading = true;
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        ({coords}) => {
-          this.userLocation = [coords.longitude, coords.latitude ];
-          this.isLoading = false;
-          resolve(this.userLocation);
-          // console.log(this.userLocation);
-
-        },
-        (error) => {
-          this.isLoading = false;
-          alert('Error getting location');
-          console.log('Error getting location', error);
-          reject(error);
-        }
-      );
-    });
+    try {
+      this.isLoading = true;
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true });
+      });
+      const { longitude, latitude } = position.coords;
+      this.userLocation = [longitude, latitude];
+      this.isLoading = false;
+      return this.userLocation;
+    } catch (error) {
+      this.isLoading = false;
+      alert('Error getting location');
+      console.log('Error getting location', error);
+      throw error;
+    }
   }
 }
