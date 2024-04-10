@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { PlacesHttpService } from 'src/app/maps/api';
 import { Feature, PlacesResponse } from 'src/app/maps/interfaces/places.interface';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Feature, PlacesResponse } from 'src/app/maps/interfaces/places.interfac
 })
 export class PlacesService {
 
-  private http = inject(HttpClient);
+  private placesHttpService = inject(PlacesHttpService);
 
   userLocation?: [number, number];
   isLoading = false;
@@ -46,12 +47,24 @@ export class PlacesService {
 
   findPlacesByQuery(query: string='') {
     // TODO: Evaluar cuando el query es nulo
-    this.isLoading = true;
 
-    this.http.get<PlacesResponse>(`https://nominatim.openstreetmap.org/search?q=${query}&format=geocodejson&limit=15`)
+    if(!this.userLocation) throw Error('User location is not ready');
+
+    this.isLoading = true;
+    this.placesHttpService.get<PlacesResponse>(`/search?q=${query}`, {
+      params: {
+        'format': 'geocodejson',
+        'limit': 15,
+        'accept-language': 'es',
+        'bounded': 1,
+      }
+
+    })
       .subscribe((response) => {
+
         this.isLoading = false;
         this.places = response.features
+        console.log(this.places);
       });
   }
 }

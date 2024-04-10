@@ -7,18 +7,14 @@ export interface PlacesResponse {
 }
 
 export interface Feature {
-  type:       FeatureType;
+  type:       string;
   properties: Properties;
   geometry:   Geometry;
 }
 
 export interface Geometry {
-  type:        GeometryType;
+  type:        string;
   coordinates: number[];
-}
-
-export enum GeometryType {
-  Point = "Point",
 }
 
 export interface Properties {
@@ -27,44 +23,13 @@ export interface Properties {
 
 export interface PropertiesGeocoding {
   place_id:  number;
-  osm_type:  OsmType;
+  osm_type:  string;
   osm_id:    number;
-  osm_key:   OsmKey;
-  osm_value: OsmValue;
-  type:      GeocodingType;
+  osm_key:   string;
+  osm_value: string;
+  type:      string;
   label:     string;
-  name:      Name;
-}
-
-export enum Name {
-  ElRetiro = "El Retiro",
-}
-
-export enum OsmKey {
-  Boundary = "boundary",
-  Place = "place",
-}
-
-export enum OsmType {
-  Node = "node",
-  Relation = "relation",
-  Way = "way",
-}
-
-export enum OsmValue {
-  Administrative = "administrative",
-  Suburb = "suburb",
-  Village = "village",
-}
-
-export enum GeocodingType {
-  City = "city",
-  District = "district",
-  Locality = "locality",
-}
-
-export enum FeatureType {
-  Feature = "Feature",
+  name:      string;
 }
 
 export interface PlacesResponseGeocoding {
