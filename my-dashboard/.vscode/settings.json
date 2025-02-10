@@ -2,6 +2,11 @@
   "angular-schematics.schematicsDefaultOptions": {
     "angular-page": {
       "eagerLoading": true
+    },
+    "angular-*": {
+      "externalTemplate": true,
+      "style": "sass",
+      "inlineStyle": true
     }
   }
 }

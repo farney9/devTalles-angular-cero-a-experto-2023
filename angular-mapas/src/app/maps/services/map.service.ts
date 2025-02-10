@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LngLatBounds, LngLatLike, Map, Marker, Popup } from 'maplibre-gl';
 import { Feature } from 'src/app/maps/interfaces/places.interface';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -52,20 +51,54 @@ export class MapService {
     }
 
     this.markers = newMarkers;
-
     if(places.length === 0) return;
-
-
     // Limites del mapa
     const bounds = new LngLatBounds();
 
     newMarkers.forEach( marker => bounds.extend(marker.getLngLat()));
-
-
+    bounds.extend(userLocation);
     this.map.fitBounds(bounds, {padding: 200});
   }
 
+  getRouteBetweenPoints(origin: [number, number], destination: [number, number]) {
+    if(!this.map) throw 'Map not initialized yet!';
+    this.map.on('load', () => {
 
+      // TODO: limpiar la ruta previa
+
+      if(this.map?.getSource('route')) {
+        this.map?.removeLayer('route');
+        this.map?.removeSource('route');
+      }
+
+      this.map?.addSource('route', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: [origin, destination],
+          },
+        },
+      });
+
+      this.map?.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75,
+        },
+      });
+    });
+  }
 
 
 }
